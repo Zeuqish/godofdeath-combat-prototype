@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589d1169ee176d34ea8382a425241bdc, type: 3}
+  m_Name: Calling_2
+  m_EditorClassIdentifier: 
+  actionSet:
+  - {fileID: 11400000, guid: 4deae6ae90bde1744940137a9f58018d, type: 2}
+  - {fileID: 11400000, guid: c4d6a868794d08940a0b229c5cd5dce1, type: 2}
+  - {fileID: 11400000, guid: e03490379942f95479a95a07b3d848ee, type: 2}
+  - {fileID: 11400000, guid: 3f29fb93a954fda46959c47a97047ed3, type: 2}
+  ritualName: 'Puppet Piercing: Practiced Puncturing'
+  passiveDescription: 'Theme:  Magic  Damage and Spirit Meter Fill are doubled when
+    the enemy was stunned last turn.'
+  passiveEffects:
+  - EffectID: passive_effect_calling_2
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 0
+    EffectValue_Float: 0
+    EffectValue_Bool: 0
+    EffectIsPassive: 1
+    EffectTargetsPlayer: 0
+    EffectTargetsEnemy: 0

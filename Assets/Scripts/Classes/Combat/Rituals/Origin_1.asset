@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589d1169ee176d34ea8382a425241bdc, type: 3}
+  m_Name: Origin_1
+  m_EditorClassIdentifier: 
+  actionSet:
+  - {fileID: 11400000, guid: c9ad0bbdfaf9f8b46b4af8ec2c6cc13d, type: 2}
+  - {fileID: 11400000, guid: c4d6a868794d08940a0b229c5cd5dce1, type: 2}
+  - {fileID: 11400000, guid: 558aa57ec2d0fe24da3a67d30d9fa641, type: 2}
+  - {fileID: 11400000, guid: 8f79f1723660d0b4faf912e9655ece47, type: 2}
+  ritualName: Consecration - Ceremonial Variant
+  passiveDescription: 'Theme: Ornate, Glimmering, Sacred If neither the player nor
+    the enemy took damage last turn, Fill the Spirit Meter by 20.   '
+  passiveEffects:
+  - EffectID: passive_effect_origin_1
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 0
+    EffectValue_Float: 0
+    EffectValue_Bool: 0
+    EffectIsPassive: 1
+    EffectTargetsPlayer: 0
+    EffectTargetsEnemy: 0

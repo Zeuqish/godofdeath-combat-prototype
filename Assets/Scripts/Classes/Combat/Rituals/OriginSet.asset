@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4cc9fc55cc378408a00c0a447f0e53, type: 3}
+  m_Name: OriginSet
+  m_EditorClassIdentifier: 
+  ritualSet:
+  - {fileID: 11400000, guid: ba4e9dc244c8d1f42ae18d191cb8a172, type: 2}
+  - {fileID: 11400000, guid: abb4a50edfe5a274197f340179823abc, type: 2}
+  - {fileID: 11400000, guid: 0e308f9ad07d9cd4cae48d460c01394d, type: 2}
+  ritualSetName: Ritual - Origin

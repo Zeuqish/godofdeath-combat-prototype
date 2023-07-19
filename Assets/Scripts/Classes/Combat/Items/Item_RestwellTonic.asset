@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54af0073ce27a4997ba8a8ad73e4d4, type: 3}
+  m_Name: Item_RestwellTonic
+  m_EditorClassIdentifier: 
+  effects:
+  - EffectID: effect_heal
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 30
+    EffectValue_Float: 0
+    EffectValue_Bool: 0
+    EffectIsPassive: 0
+    EffectTargetsPlayer: 1
+    EffectTargetsEnemy: 0
+  - EffectID: effect_defend
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 0
+    EffectValue_Float: 0.5
+    EffectValue_Bool: 0
+    EffectIsPassive: 0
+    EffectTargetsPlayer: 1
+    EffectTargetsEnemy: 0
+  spiritAffinity: affinity_white
+  itemTags:
+  - tag_otherworldly
+  - tag_sacred
+  - tag_magic
+  capacity: 2
+  currentCount: 2
+  itemName: Restwell Tonic
