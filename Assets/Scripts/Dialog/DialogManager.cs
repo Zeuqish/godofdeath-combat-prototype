@@ -44,7 +44,7 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
-        if (InputManager.GetInstance().GetInteractPressed() )
+        if (InputManager.GetInstance().GetInteractPressed())
         {
             continueStory();
         }
@@ -58,6 +58,19 @@ public class DialogManager : MonoBehaviour
     public void EnterDialogMode(TextAsset storyText, int dialogType, string storySection)
     {
         currentStory = new Story(storyText.text);
+        if (storySection != "")
+        {
+            currentStory.ChoosePathString(storySection);
+        }
+        isDialogPlaying = true;
+        dialogUIManager.setDialogUI(dialogType);
+
+        continueStory();
+    }
+
+    public void EnterDialogMode(Story currentStory, int dialogType, string storySection) //method overload used when variables need to be modified pre-entering dialog
+    {
+        this.currentStory = currentStory;
         if (storySection != "")
         {
             currentStory.ChoosePathString(storySection);

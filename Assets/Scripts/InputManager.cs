@@ -12,9 +12,11 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private Vector2 moveDirection = Vector2.zero;
+    private Vector2 mousePosition = Vector2.zero;
     private bool jumpPressed = false;
     private bool interactPressed = false;
     private bool submitPressed = false;
+    private bool continueDialogPressed = false;
 
     private static InputManager instance;
 
@@ -68,6 +70,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void ContinueDialogPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            continueDialogPressed = true;
+        }
+        else if (context.canceled)
+        {
+            continueDialogPressed = false;
+        }
+    }
+
     public void SubmitPressed(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -80,11 +94,20 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void MousePointed(InputAction.CallbackContext context)
+    {
+       mousePosition = context.ReadValue<Vector2>();
+    }
+
     public Vector2 GetMoveDirection()
     {
         return moveDirection;
     }
 
+    public Vector2 GetMousePosition()
+    {
+        return mousePosition;
+    }
     // for any of the below 'Get' methods, if we're getting it then we're also using it,
     // which means we should set it to false so that it can't be used again until actually
     // pressed again.
@@ -100,6 +123,13 @@ public class InputManager : MonoBehaviour
     {
         bool result = interactPressed;
         interactPressed = false;
+        return result;
+    }
+
+    public bool GetContinueDialogPressed()
+    {
+        bool result = continueDialogPressed;
+        continueDialogPressed = false;
         return result;
     }
 

@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDir;
     private float speed = 5f;
     private bool useFlippedSprite = false;
+
+    private Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+    [SerializeField] GameObject animatorObject;
+    private Animator animator;
     [SerializeField] private GameObject unflippedSprite, flippedSprite;
     void Start()
     {
-        
+        animator = animatorObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -25,9 +29,17 @@ public class PlayerController : MonoBehaviour
             } else if (moveDir.y < 0) {
                 useFlippedSprite = false;
             }
-            gameObject.transform.Translate(new Vector3(moveDir.x, 0, moveDir.y) * Time.deltaTime * speed);
-        }
 
+            var isometricInput = rotationMatrix.MultiplyPoint3x4(new Vector3(moveDir.x, 0 , moveDir.y));
+            animator.SetFloat("XInput", moveDir.x);
+            gameObject.transform.Translate(isometricInput * Time.deltaTime * speed);
+            animator.SetBool("isWalking", true);
+        } else
+        {
+            animator.SetBool("isWalking", false);
+        }
+        
+        /*
         if (useFlippedSprite)
         {
             flippedSprite.SetActive(true);
@@ -36,7 +48,7 @@ public class PlayerController : MonoBehaviour
         {
             flippedSprite.SetActive(false);
             unflippedSprite.SetActive(true);
-        }
+        }*/
 
     }
 }

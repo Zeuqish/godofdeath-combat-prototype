@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""continue_dialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b3652f4-1a14-42a0-91bf-946eecda92dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""091bcb17-b8f8-4f99-897b-2ada6ab62961"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""continue_dialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +195,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_game_move = m_game.FindAction("move", throwIfNotFound: true);
         m_game_interact = m_game.FindAction("interact", throwIfNotFound: true);
         m_game_point = m_game.FindAction("point", throwIfNotFound: true);
+        m_game_continue_dialog = m_game.FindAction("continue_dialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,6 +261,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_game_move;
     private readonly InputAction m_game_interact;
     private readonly InputAction m_game_point;
+    private readonly InputAction m_game_continue_dialog;
     public struct GameActions
     {
         private @PlayerControls m_Wrapper;
@@ -248,6 +270,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @move => m_Wrapper.m_game_move;
         public InputAction @interact => m_Wrapper.m_game_interact;
         public InputAction @point => m_Wrapper.m_game_point;
+        public InputAction @continue_dialog => m_Wrapper.m_game_continue_dialog;
         public InputActionMap Get() { return m_Wrapper.m_game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,6 +292,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @point.started += instance.OnPoint;
             @point.performed += instance.OnPoint;
             @point.canceled += instance.OnPoint;
+            @continue_dialog.started += instance.OnContinue_dialog;
+            @continue_dialog.performed += instance.OnContinue_dialog;
+            @continue_dialog.canceled += instance.OnContinue_dialog;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -285,6 +311,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @point.started -= instance.OnPoint;
             @point.performed -= instance.OnPoint;
             @point.canceled -= instance.OnPoint;
+            @continue_dialog.started -= instance.OnContinue_dialog;
+            @continue_dialog.performed -= instance.OnContinue_dialog;
+            @continue_dialog.canceled -= instance.OnContinue_dialog;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -308,5 +337,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
+        void OnContinue_dialog(InputAction.CallbackContext context);
     }
 }

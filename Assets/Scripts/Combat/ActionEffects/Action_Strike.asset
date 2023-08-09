@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5607c59f4f41c9b4ab1e23e49322ff4b, type: 3}
+  m_Name: Action_Strike
+  m_EditorClassIdentifier: 
+  effects:
+  - EffectID: effect_damage
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 5
+    EffectValue_Float: 0
+    EffectValue_Bool: 0
+    EffectIsPassive: 0
+    EffectTargetsPlayer: 0
+    EffectTargetsEnemy: 1
+  - EffectID: effect_hostility_add
+    EffectCount: 0
+    EffectBaseCount: 0
+    EffectValue_Int: 5
+    EffectValue_Float: 0
+    EffectValue_Bool: 0
+    EffectIsPassive: 0
+    EffectTargetsPlayer: 0
+    EffectTargetsEnemy: 1
+  spiritAffinity: affinity_green
+  actionName: Strike
+  flavorText: 5 Damage. Slightly increase enemy hostility.
+  canBeReused: 1
+  isUsedUp: 0
