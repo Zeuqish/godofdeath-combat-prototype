@@ -255,7 +255,7 @@ public class CombatUIManager : MonoBehaviour
                         status_effect = "Defend - Reduce Damage Taken by 50%";
                         break;
                     case "effect_charge":
-                        status_effect = "Charge - Increase Damage by 50%";
+                        status_effect = "Charge - Increase Damage by 100%";
                         break;
                     case "effect_vulnerable":
                         status_effect = "Vulnerable - Increase Damage Taken by 50%";

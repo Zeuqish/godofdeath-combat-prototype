@@ -165,7 +165,7 @@ public class CombatManager : MonoBehaviour
                 chosenItem.reduceItemCount();
                 if (chosenItem.getCurrentCount() <= 0)
                 {
-                    combatUIManager.disableActionButton(itemIndex);
+                    combatUIManager.disableItemButton(itemIndex);
                 }
             } else
             {
@@ -409,14 +409,14 @@ public class CombatManager : MonoBehaviour
 
     private int processAffinities(string affinity, bool isAction)
     {
-        actionMatchesAffinity = false;
         int spiritFill = playerCombatData.getBaseSpiritFill();
         if (isAction)
         {
             spiritFill += 10;
         }
 
-        if (affinity == enemyCombatData.getSpiritOrbs()[currentRitualSetIndex].getOrbAffinity())
+        OrbSO currentOrb = enemyCombatData.getSpiritOrbs()[currentRitualSetIndex];
+        if (affinity == currentOrb.getOrbAffinity() || (affinity == currentOrb.getRawOrbAffinity() && !currentOrb.isOrbVisible()))
         {
             Debug.Log("Action has the same affinity! Spirit Meter fill doubled.");
             spiritFill *= 2;
@@ -685,7 +685,36 @@ public class CombatManager : MonoBehaviour
 
     public string getItemButtonTooltip(int buttonIndex)
     {
-        return items[buttonIndex].getEffectText();
+        StringBuilder output = new StringBuilder(100);
+        output.Append("Tags: ");
+        foreach (String tag in items[buttonIndex].getItemTags())
+        {
+            switch(tag)
+            {
+                case "tag_rotting":
+                    output.Append("Rotting");
+                    break;
+                case "tag_handy":
+                    output.Append("Handy");
+                    break;
+                case "tag_otherworldly":
+                    output.Append("Otherworldly");
+                    break;
+                case "tag_sacred":
+                    output.Append("Sacred");
+                    break;
+                case "tag_magic":
+                    output.Append("Magic");
+                    break;
+                case "tag_mundane":
+                    output.Append("Mundane");
+                    break;
+            }
+            output.Append(", ");
+        }; 
+           
+        output.AppendLine(items[buttonIndex].getEffectText());
+        return output.ToString();
     }
     public static CombatManager getInstance()
     {
