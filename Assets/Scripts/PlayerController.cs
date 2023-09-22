@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     private Vector2 moveDir;
     private float speed = 5f;
     private bool useFlippedSprite = false;
@@ -13,12 +14,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject animatorObject;
     private Animator animator;
     [SerializeField] private GameObject unflippedSprite, flippedSprite;
+    void Awake(){
+        instance = this;
+    }
     void Start()
     {
         animator = animatorObject.GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         moveDir = InputManager.GetInstance().GetMoveDirection();
         if (moveDir != Vector2.zero)
@@ -32,7 +36,8 @@ public class PlayerController : MonoBehaviour
 
             var isometricInput = rotationMatrix.MultiplyPoint3x4(new Vector3(moveDir.x, 0 , moveDir.y));
             animator.SetFloat("XInput", moveDir.x);
-            gameObject.transform.Translate(isometricInput * Time.deltaTime * speed);
+            // gameObject.transform.Translate(isometricInput * Time.deltaTime * speed);
+            gameObject.transform.position += (moveDir.x*speed*Time.fixedDeltaTime)*transform.right + (moveDir.y*speed*Time.fixedDeltaTime)*transform.forward;
             animator.SetBool("isWalking", true);
         } else
         {
