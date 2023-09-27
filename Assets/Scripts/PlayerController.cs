@@ -1,49 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
-    private Vector2 moveDir;
+    PlayerControls actions;
+    
+    // Statistics
     private float speed = 5f;
     private bool useFlippedSprite = false;
-
+    [SerializeField] private GameObject unflippedSprite, flippedSprite;
     private Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+    // Cached components
     [SerializeField] GameObject animatorObject;
     private Animator animator;
-    [SerializeField] private GameObject unflippedSprite, flippedSprite;
+    [SerializeField] I_Interactor interactor;
+    Rigidbody rb;
+    
+
+    // Cached Inputs
+    private Vector2 moveDir;
     void Awake(){
         instance = this;
+        actions = new PlayerControls();
+        actions.game.interact.performed += Interact;
     }
     void Start()
     {
         animator = animatorObject.GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        interactor = GetComponent<I_Interactor>();
     }
 
     void FixedUpdate()
     {
-        moveDir = InputManager.GetInstance().GetMoveDirection();
-        if (moveDir != Vector2.zero)
-        {
-            if (moveDir.y > 0)
-            {
-                useFlippedSprite = true;
-            } else if (moveDir.y < 0) {
-                useFlippedSprite = false;
-            }
-
-            var isometricInput = rotationMatrix.MultiplyPoint3x4(new Vector3(moveDir.x, 0 , moveDir.y));
-            animator.SetFloat("XInput", moveDir.x);
-            // gameObject.transform.Translate(isometricInput * Time.deltaTime * speed);
-            gameObject.transform.position += (moveDir.x*speed*Time.fixedDeltaTime)*transform.right + (moveDir.y*speed*Time.fixedDeltaTime)*transform.forward;
-            animator.SetBool("isWalking", true);
-        } else
-        {
-            animator.SetBool("isWalking", false);
-        }
-        
+        PollMoveDirection(); // Poll the moveDirection for movement here; continuous input
+        rb.velocity = moveDir.x*speed*transform.right + moveDir.y*speed*transform.forward; // Apply movement to rigidbody so we can use Unity's physics system.
         /*
         if (useFlippedSprite)
         {
@@ -55,5 +51,18 @@ public class PlayerController : MonoBehaviour
             unflippedSprite.SetActive(true);
         }*/
 
+    }
+    void Update(){
+        UpdateAnimatorParameters(); // Update animator parameters on frame updates (when the animation would actually update)
+    }
+    void Interact(InputAction.CallbackContext context){
+        interactor.Interact();
+    }
+    void PollMoveDirection(){
+        moveDir = InputManager.GetInstance().GetMoveDirection();
+    }
+    void UpdateAnimatorParameters(){
+        animator.SetFloat("XInput", moveDir.x);
+        //animator.SetFloat("YInput", moveDir.y);
     }
 }
