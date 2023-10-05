@@ -466,6 +466,8 @@ public class CombatManager : MonoBehaviour
         combatUIManager.updatePlayerStatusEffects(playerCombatData.getStatusEffects().Values);
         isPlayerTurn = !isPlayerTurn;
 
+
+
         if (actionMatchesAffinity && !enemyCombatData.getSpiritOrbs()[currentRitualSetIndex].isOrbVisible() && enemyCombatData.getSpiritOrbs()[currentRitualSetIndex].isOrbReadable())
         {
             Debug.Log("Orb should be visible");
@@ -476,7 +478,7 @@ public class CombatManager : MonoBehaviour
 
         if (isPlayerTurn)
         {
-           
+            playerCombatData.reduceCount("effect_defend");
         } else if (isPlayerTurn == false)
         {
             yield return StartCoroutine(enemyTurn());
